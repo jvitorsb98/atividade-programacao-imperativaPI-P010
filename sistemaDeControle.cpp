@@ -148,6 +148,7 @@ int menu(int opcao)
 void inserir(Aluno &aluno, vector<Aluno> &listaDeAlunos)
 {
     system("cls");
+    bool sair = true;
 
     // empty() -> Retorna true se o vetor estiver vazio
     if (listaDeAlunos.empty())
@@ -164,11 +165,38 @@ void inserir(Aluno &aluno, vector<Aluno> &listaDeAlunos)
             cout << "Informe o nome do aluno: ";
             getline(cin, aluno.nome);
 
-            cout << "Informe a 1º nota do aluno: ";
-            cin >> aluno.nota1;
+            while (sair)
+            {
+                system("cls");
+                cout << "Informe a 1º nota do aluno: ";
+                cin >> aluno.nota1;
 
-            cout << "Informe a 2º nota do aluno: ";
-            cin >> aluno.nota2;
+                if (aluno.nota1 < 0 || aluno.nota1 > 10)
+                {
+                    cout << "\nNota invalida!...\n";
+                }
+                else
+                {
+                    sair = false;
+                }
+            }
+            sair = true;
+
+            while (sair)
+            {
+                system("cls");
+                cout << "Informe a 2º nota do aluno: ";
+                cin >> aluno.nota2;
+
+                if (aluno.nota2 < 0 || aluno.nota2 > 10)
+                {
+                    cout << "\nNota invalida!...\n";
+                }
+                else
+                {
+                    sair = false;
+                }
+            }
 
             aluno.media = (aluno.nota1 + aluno.nota2) / 2;
 
@@ -229,11 +257,14 @@ void inserirAlunosNovos(Aluno &aluno, vector<Aluno> &listaDeAlunos)
                     cout << "Informe o nome do aluno: ";
                     getline(cin, it->nome);
 
-                    cout << "\nInforme a 1º nota do aluno: ";
-                    cin >> it->nota1;
+                    while (it->nota1 < 0 || it->nota1 > 10 || it->nota2 < 0 || it->nota2 > 10)
+                    {
+                        cout << "Informe a 1º nota do aluno: ";
+                        cin >> it->nota1;
 
-                    cout << "\nInforme a 2º nota do aluno: ";
-                    cin >> it->nota2;
+                        cout << "Informe a 2º nota do aluno: ";
+                        cin >> it->nota2;
+                    }
 
                     it->media = (it->nota1 + it->nota2) / 2;
 
@@ -477,10 +508,26 @@ void alterarNotas(vector<Aluno> &listaDeAlunos)
                         if (opcao == '1')
                         {
                             system("cls");
-                            cout << "\nInforme a 1º nota do aluno: ";
-                            cin >> listaDeAlunos[x].nota1;
+
+                            while (sair)
+                            {
+                                cout << "\nInforme a 1º nota do aluno: ";
+                                cin >> listaDeAlunos[x].nota1;
+
+                                if (listaDeAlunos[x].nota1 < 0 || listaDeAlunos[x].nota1 > 10)
+                                {
+                                    cout << "\nNota invalida!...\n";
+                                }
+                                else
+                                {
+                                    sair = false;
+                                }
+                            }
+                            sair = true;
                             cout << "1º Nota alterada com sucesso!...\n";
+
                             listaDeAlunos[x].media = (listaDeAlunos[x].nota1 + listaDeAlunos[x].nota2) / 2;
+
                             cout << "\n"
                                  << x + 1 << "º Aluno:" << endl;
                             cout << "\nNome: " << listaDeAlunos[x].nome
@@ -494,10 +541,26 @@ void alterarNotas(vector<Aluno> &listaDeAlunos)
                             if (opcao == '2')
                             {
                                 system("cls");
-                                cout << "\nInforme a 2º nota do aluno: ";
-                                cin >> listaDeAlunos[x].nota2;
+
+                                while (sair)
+                                {
+                                    cout << "\nInforme a 2º nota do aluno: ";
+                                    cin >> listaDeAlunos[x].nota2;
+
+                                    if (listaDeAlunos[x].nota2 < 0 || listaDeAlunos[x].nota2 > 10)
+                                    {
+                                        cout << "\nNota invalida!...\n";
+                                    }
+                                    else
+                                    {
+                                        sair = false;
+                                    }
+                                }
+                                sair = true;
                                 cout << "2º Nota alterada com sucesso!...\n";
+
                                 listaDeAlunos[x].media = (listaDeAlunos[x].nota1 + listaDeAlunos[x].nota2) / 2;
+
                                 cout << "\n"
                                      << x + 1 << "º Aluno:" << endl;
                                 cout << "\nNome: " << listaDeAlunos[x].nome

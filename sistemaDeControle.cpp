@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<string>
+#include<stdlib.h>
 
 using namespace std;
 
@@ -30,6 +31,8 @@ void impressaoETrocaNota(vector<Aluno> &);
 void permiteTrocaNota(vector<Aluno> &);
 void tentaTrocaNota(vector<Aluno> &);
 void imprimeResultadoFinal(vector<Aluno> &);
+
+void limparTela();
 
 
 int main(){
@@ -167,8 +170,8 @@ void escolhaDeInsercao(vector<Aluno> &listaDeAlunos , int limiteDeAlunos, int &n
         cout << "Deseja inserir mais alunos(s/n)? ";
         cin >> escolha1;
         if(escolha1!= 's' && escolha1!= 'n'){
-            system("clear");
-            cout << "Escolha invalida";
+            limparTela();
+            cout << "Escolha invalida" << endl;
         }else if(escolha1=='s'){
             tentaInserirAluno(listaDeAlunos,limiteDeAlunos,numeroDeAlunosVigente);
         }
@@ -181,8 +184,8 @@ void escolhaDeExclusao(vector<Aluno> &listaDeAlunos , int limiteDeAlunos, int &n
         cout << "Deseja excuir um aluno(s/n)? ";
         cin >> escolha2;
         if(escolha2!= 's' && escolha2!= 'n'){
-            system("clear");
-            cout << "Escolha invalida";
+            limparTela();
+            cout << "Escolha invalida" << endl;
         }else if(escolha2=='s'){
             tentaExcluirAluno(listaDeAlunos,numeroDeAlunosVigente);
         }
@@ -248,4 +251,12 @@ void bubbleSort(vector<Aluno>& listaDeAlunos) {
         }
         n--;
     } while (trocou);
+}
+
+void limparTela() {
+    #ifdef _WIN32 // Se for Windows
+        system("cls");
+    #else // Se for Linux ou macOS
+        system("clear");
+    #endif
 }

@@ -222,6 +222,7 @@ void inserirAlunosNovos(Aluno &aluno, vector<Aluno> &listaDeAlunos)
     if (listaDeAlunos.empty())
     {
         cout << "\nA lista precisa ser inicializada, favor escolha a opção 1 do menu!...\n";
+        pausar();
     }
     else
     {
@@ -300,6 +301,13 @@ void inserirAlunosNovos(Aluno &aluno, vector<Aluno> &listaDeAlunos)
 
 void listar(vector<Aluno> listaDeAlunos)
 {
+
+    if (listaDeAlunos.empty())
+    {
+        cout << "\nA lista precisa ser inicializada, favor escolha a opção 1 do menu!...\n";
+        return;
+    }
+
     int i = 0;
     cout << "\n==============LISTA DE ALUNOS ORDENADOS EM ORDEM ALFABETICA==============\n";
     for (auto it = listaDeAlunos.begin(); it != listaDeAlunos.end(); it++)
@@ -398,6 +406,15 @@ void excluir(vector<Aluno> &listaDeAlunos) {
 
 void listaDeAprovados(vector<Aluno> &listaDeAlunos)
 {
+
+    if (listaDeAlunos.empty())
+    {
+        limparTela();
+        cout << "\nLista vazia, não possui alunos para alteração de notas!...\n";
+        pausar();
+        return;
+    }
+
     int i = 0;
     limparTela();
     cout << "\n================LISTA DE APROVADOS================\n";
@@ -610,6 +627,14 @@ void alterarNotas(vector<Aluno> &listaDeAlunos)
 }
 void gerarClassificacao(vector<Aluno> &listaDeAlunos)
 {
+
+    if (listaDeAlunos.empty())
+    {
+        limparTela();
+        cout << "\nLista vazia, não possui alunos para alteração de notas!...\n";
+        pausar();
+        return;
+    }
 
     limparTela();
     int n = listaDeAlunos.size();

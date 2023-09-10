@@ -91,8 +91,7 @@ int main()
         case 8:
 
             limparTela();
-            cout << "\nObrigado por Utilizar nosso Sistema de Controle de Notas!\n\n"
-                 << endl;
+            cout << "\nObrigado por Utilizar nosso Sistema de Controle de Notas!\n\n" << endl;
             sair = false;
 
             break;
@@ -144,12 +143,12 @@ int menu(int opcao)
     cin >> opcao;
 
     return opcao;
-    limparTela();;
+    limparTela();
 }
 
 void inserir(Aluno &aluno, vector<Aluno> &listaDeAlunos)
 {
-    limparTela();;
+    limparTela();
 
     // empty() -> Retorna true se o vetor estiver vazio
     if (listaDeAlunos.empty())
@@ -165,19 +164,27 @@ void inserir(Aluno &aluno, vector<Aluno> &listaDeAlunos)
 
             cout << "Informe o nome do aluno: ";
             getline(cin, aluno.nome);
+            do{
+                cout << "Informe a 1º nota do aluno: ";
+                cin >> aluno.nota1;
+                if(aluno.nota1 > 10 || aluno.nota1 < 0){
+                    cout << "**Nota Inválida**" << endl;
+                }
+            }while(aluno.nota1 > 10 || aluno.nota1 < 0);
 
-            cout << "Informe a 1º nota do aluno: ";
-            cin >> aluno.nota1;
-
-            cout << "Informe a 2º nota do aluno: ";
-            cin >> aluno.nota2;
-
+            do{
+                cout << "Informe a 2º nota do aluno: ";
+                cin >> aluno.nota2; 
+                if(aluno.nota2 > 10 || aluno.nota2 < 0){
+                    cout << "**Nota Inválida**" << endl;
+                }
+            }while(aluno.nota2 > 10 || aluno.nota2 < 0);
             aluno.media = (aluno.nota1 + aluno.nota2) / 2;
 
             listaDeAlunos.push_back(aluno);
             cin.get();
         }
-        limparTela();;
+        limparTela();
     }
     else
     {
@@ -207,7 +214,7 @@ bool limiteDeAlunos(vector<Aluno> &listaDeAlunos)
 
 void inserirAlunosNovos(Aluno &aluno, vector<Aluno> &listaDeAlunos)
 {
-    limparTela();;
+    limparTela();
     std::vector<Aluno>::iterator it;
     it = listaDeAlunos.begin();
     char opcao = 's';
@@ -231,42 +238,52 @@ void inserirAlunosNovos(Aluno &aluno, vector<Aluno> &listaDeAlunos)
                     cout << "Informe o nome do aluno: ";
                     getline(cin, it->nome);
 
-                    cout << "\nInforme a 1º nota do aluno: ";
-                    cin >> it->nota1;
+                    do{
+                        cout << "Informe a 1º nota do aluno: ";
+                        cin >> it->nota1;
+                        if(it->nota1 > 10 || it->nota1 < 0){
+                            cout << "**Nota Inválida**" << endl;
+                        }
+                    }while(it->nota1 > 10 || it->nota1 < 0);
 
-                    cout << "\nInforme a 2º nota do aluno: ";
-                    cin >> it->nota2;
+                    do{
+                        cout << "Informe a 2º nota do aluno: ";
+                        cin >> it->nota2;
+                        if(it->nota2 > 10 || it->nota2 < 0){
+                            cout << "**Nota Inválida**" << endl;
+                        }
+                    }while(it->nota2 > 10 || it->nota2 < 0);
 
                     it->media = (it->nota1 + it->nota2) / 2;
 
                     listaDeAlunos.push_back(aluno);
 
-                    limparTela();;
+                    limparTela();
                     cout << "\nAluno cadastrado com sucesso!...\n";
                     cout << "\nDeseja continuar cadastrando aluno ?\nDigite [s] para sim, [n] para não:  ";
                     cin >> opcao;
                 }
                 if (opcao != 's' && opcao != 'n')
                 {
-                    limparTela();;
+                    limparTela();
                     cout << "\nOpção invalida!...\n";
                     cout << "\nDeseja continuar cadastrando aluno ?\nDigite [s] para continuar, [n] para sair:  ";
                     cin >> opcao;
                 }
                 if (opcao == 'n' || opcao == 'N')
                 {
-                    limparTela();;
+                    limparTela();
                     break;
                 }
                 if (limiteDeAlunos(listaDeAlunos))
                 {
-                    limparTela();;
+                    limparTela();
                     cout << "Continue!...";
                     break;
                 }
                 else
                 {
-                    limparTela();;
+                    limparTela();
                     cout << "\nOps, não esta sendo permitido cadastrar novos alunos, aguarde a segunda chamada, ou a exclusão de algum aluno!...\n";
                     pausar();
                 }
@@ -274,7 +291,7 @@ void inserirAlunosNovos(Aluno &aluno, vector<Aluno> &listaDeAlunos)
         }
         else
         {
-            limparTela();;
+            limparTela();
             cout << "\nOps, não esta sendo permitido cadastrar novos alunos, aguarde a segunda chamada, ou a exclusão de algum aluno!...\n";
             pausar();
         }
@@ -299,7 +316,7 @@ void listar(vector<Aluno> listaDeAlunos)
 
 void listarPorOrdemAlfabetica(vector<Aluno> listaDeAlunos)
 {
-    limparTela();;
+    limparTela();
     int n = listaDeAlunos.size();
     bool trocou;
     Aluno aux;
@@ -322,75 +339,66 @@ void listarPorOrdemAlfabetica(vector<Aluno> listaDeAlunos)
 
     listar(listaDeAlunos);
 }
-void excluir(vector<Aluno> &listaDeAlunos)
-{
-
-    limparTela();;
+void excluir(vector<Aluno> &listaDeAlunos) {
+    limparTela();
     string nome;
     char opcao;
     bool sair = true;
 
     cout << "\n=================EXCLUSÃO DE ALUNOS=================\n";
-    while (sair)
-    {
-        if (listaDeAlunos.empty())
-        {
-            limparTela();;
+    while (sair) {
+        if (listaDeAlunos.empty()) {
+            limparTela();
             cout << "\nLista vazia, não possui alunos para exclusão!...\n";
             pausar();
             sair = false;
-        }
-        else
-        {
+        } else {
             cout << "\nInforme o nome do aluno, para exclusão:  ";
             cin >> nome;
+            bool alunoEncontrado = false;
 
-            for (auto it = listaDeAlunos.begin(); it != listaDeAlunos.end(); it++)
-            {
-                if (it->nome == nome)
-                {
-                    listaDeAlunos.erase(it);
-                    nome = "null";
+            for (auto it = listaDeAlunos.begin(); it != listaDeAlunos.end();) {
+                if (it->nome == nome) {
+                    it = listaDeAlunos.erase(it); // Remove o aluno e atualiza o iterador
+                    alunoEncontrado = true;
+                } else {
+                    ++it; // Avança para o próximo aluno
                 }
             }
-        }
-        if (nome == "null")
-        {
-            limparTela();;
-            cout << "\nAluno excluido com sucesso!...\n";
-            pausar();
-        }
-        else
-        {
-            limparTela();;
-            cout << "\nAluno não encontrado!...\n";
-            pausar();
+
+            if (alunoEncontrado) {
+                limparTela();
+                cout << "\nAluno excluído com sucesso!...\n";
+                pausar();
+            } else {
+                limparTela();
+                cout << "\nAluno não encontrado!...\n";
+                pausar();
+            }
         }
 
-        if (sair)
-        {
-            limparTela();;
+        if (sair) {
+            limparTela();
             cout << "\nDeseja continuar fazendo a exclusão de alunos ?\nDigite [s] para sim, [n] para não:  ";
             cin >> opcao;
 
-            if (opcao != 's' && opcao != 'n')
-            {
-                limparTela();;
-                cout << "\nOpção invalida!...\n";
+            if (opcao != 's' && opcao != 'n') {
+                limparTela();
+                cout << "\nOpção inválida!...\n";
                 cout << "\nDeseja continuar fazendo a exclusão de alunos?\nDigite [s] para sim, [n] para não:  ";
                 cin >> opcao;
             }
-            if (opcao == 'n' || opcao == 'N')
-            {
+            if (opcao == 'n' || opcao == 'N') {
                 sair = false;
             }
         }
     }
 }
+
 void listaDeAprovados(vector<Aluno> &listaDeAlunos)
 {
     int i = 0;
-    limparTela();;
+    limparTela();
     cout << "\n================LISTA DE APROVADOS================\n";
     for (auto it = listaDeAlunos.begin(); it != listaDeAlunos.end(); it++)
     {
@@ -424,7 +432,7 @@ void listaDeAprovados(vector<Aluno> &listaDeAlunos)
 void alterarNotas(vector<Aluno> &listaDeAlunos)
 {
 
-    limparTela();;
+    limparTela();
     string nome;
     char opcao;
     int x = 0;
@@ -435,7 +443,7 @@ void alterarNotas(vector<Aluno> &listaDeAlunos)
     {
         if (listaDeAlunos.empty())
         {
-            limparTela();;
+            limparTela();
             cout << "\nLista vazia, não possui alunos para alteração de notas!...\n";
             pausar();
             sair = false;
@@ -451,7 +459,7 @@ void alterarNotas(vector<Aluno> &listaDeAlunos)
                 {
                     if (listaDeAlunos[i].nome == nome)
                     {
-                        limparTela();;
+                        limparTela();
                         nome = "null";
                         x = i;
                         cout << "\n"
@@ -470,7 +478,7 @@ void alterarNotas(vector<Aluno> &listaDeAlunos)
 
                     if (opcao == '0')
                     {
-                        limparTela();;
+                        limparTela();
                         sair = false;
                         break;
                     }
@@ -478,9 +486,14 @@ void alterarNotas(vector<Aluno> &listaDeAlunos)
                     {
                         if (opcao == '1')
                         {
-                            limparTela();;
-                            cout << "\nInforme a 1º nota do aluno: ";
-                            cin >> listaDeAlunos[x].nota1;
+                            limparTela();
+                            do{
+                                cout << "\nInforme a 1º nota do aluno: ";
+                                cin >> listaDeAlunos[x].nota1;
+                                if(listaDeAlunos[x].nota1 < 0 || listaDeAlunos[x].nota1 > 10){
+                                    cout << "**Nota Inválida**" << endl;
+                                }
+                            }while(listaDeAlunos[x].nota1 < 0 || listaDeAlunos[x].nota1 > 10);
                             cout << "1º Nota alterada com sucesso!...\n";
                             listaDeAlunos[x].media = (listaDeAlunos[x].nota1 + listaDeAlunos[x].nota2) / 2;
                             cout << "\n"
@@ -495,9 +508,14 @@ void alterarNotas(vector<Aluno> &listaDeAlunos)
                         {
                             if (opcao == '2')
                             {
-                                limparTela();;
-                                cout << "\nInforme a 2º nota do aluno: ";
-                                cin >> listaDeAlunos[x].nota2;
+                                limparTela();
+                                do{
+                                    cout << "\nInforme a 2º nota do aluno: ";
+                                    cin >> listaDeAlunos[x].nota2;
+                                    if(listaDeAlunos[x].nota2 < 0 || listaDeAlunos[x].nota2 > 10){
+                                        cout << "**Nota Inválida**" << endl;
+                                    }
+                                }while(listaDeAlunos[x].nota2 < 0 || listaDeAlunos[x].nota2 > 10);
                                 cout << "2º Nota alterada com sucesso!...\n";
                                 listaDeAlunos[x].media = (listaDeAlunos[x].nota1 + listaDeAlunos[x].nota2) / 2;
                                 cout << "\n"
@@ -510,7 +528,7 @@ void alterarNotas(vector<Aluno> &listaDeAlunos)
                             }
                             else
                             {
-                                limparTela();;
+                                limparTela();
                                 cout << "\nOpção invalida!...\n";
                                 cout << "\nDeseja continuar fazendo a alteração de notas?\nDigite [s] para sim, [n] para não:  ";
                                 cin >> opcao;
@@ -524,20 +542,20 @@ void alterarNotas(vector<Aluno> &listaDeAlunos)
                 }
                 else
                 {
-                    limparTela();;
+                    limparTela();
                     cout << "\nAluno não encontrado!...\n";
                     pausar();
                 }
                 sair = true;
                 if (sair)
                 {
-                    limparTela();;
+                    limparTela();
                     cout << "\nDeseja continuar fazendo a alteração de notas do mesmo aluno?\nDigite [s] para sim, [n] para não:  ";
                     cin >> opcao;
 
                     if (opcao == 's' || opcao == 'S')
                     {
-                        limparTela();;
+                        limparTela();
                     }
                     else
                     {
@@ -550,7 +568,7 @@ void alterarNotas(vector<Aluno> &listaDeAlunos)
                             {
                                 if (listaDeAlunos[i].nome == nome)
                                 {
-                                    limparTela();;
+                                    limparTela();
                                     nome = "null";
                                     sair = false;
                                     opcao = 's';
@@ -566,7 +584,7 @@ void alterarNotas(vector<Aluno> &listaDeAlunos)
                             }
                             if (nome != "null")
                             {
-                                limparTela();;
+                                limparTela();
                                 cout << "\nAluno não encontrado!...\n";
                                 pausar();
                             }
@@ -575,7 +593,7 @@ void alterarNotas(vector<Aluno> &listaDeAlunos)
                     sair = true;
                     if (opcao != 's' && opcao != 'n')
                     {
-                        limparTela();;
+                        limparTela();
                         cout << "\nOpção invalida!...\n";
                         cout << "\nDeseja continuar fazendo a alteração de notas?\nDigite [s] para sim, [n] para não:  ";
                         cin >> opcao;
@@ -592,7 +610,7 @@ void alterarNotas(vector<Aluno> &listaDeAlunos)
 void gerarClassificacao(vector<Aluno> &listaDeAlunos)
 {
 
-    limparTela();;
+    limparTela();
     int n = listaDeAlunos.size();
     int i = 0;
     bool trocou;
@@ -616,7 +634,7 @@ void gerarClassificacao(vector<Aluno> &listaDeAlunos)
 
     cout << "\n================LISTA DE CLASSIFICAÇÃO================\n";
 
-    limparTela();;
+    limparTela();
     cout << "\n================LISTA DE APROVADOS================\n";
     for (auto it = listaDeAlunos.begin(); it != listaDeAlunos.end(); it++)
     {

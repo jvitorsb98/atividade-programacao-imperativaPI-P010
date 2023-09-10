@@ -4,7 +4,6 @@
 #include <cstring>
 
 using namespace std;
-#define TAM
 
 typedef struct
 {

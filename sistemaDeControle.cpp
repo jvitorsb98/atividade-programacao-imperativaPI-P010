@@ -361,6 +361,7 @@ void excluir(vector<Aluno> &listaDeAlunos) {
                 if (it->nome == nome) {
                     it = listaDeAlunos.erase(it); // Remove o aluno e atualiza o iterador
                     alunoEncontrado = true;
+                    break;
                 } else {
                     ++it; // Avança para o próximo aluno
                 }
